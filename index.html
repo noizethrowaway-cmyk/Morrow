@@ -86,7 +86,23 @@
               <div class="wizard-field-grid">
                 <div class="field-group field-wide"><label for="wizardPropertyValue">Expected property value</label><div class="input-wrap"><span class="prefix">£</span><input id="wizardPropertyValue" type="number" inputmode="decimal" min="50000" max="1000000" step="1000" placeholder="—" autocomplete="off"></div><span class="field-note">Use a cautious estimate as well as considering an optimistic one.</span></div>
               </div>
-              <div class="wizard-target-block"><div class="wizard-label">Your target LTV <span class="field-help" tabindex="0" data-tip="LTV is the mortgage balance divided by the property's value. Lower LTV bands may offer different products, depending on the lender.">i</span></div><div class="target-options wizard-target-options" role="group" aria-label="Choose your target loan-to-value"><button type="button" class="target-choice" data-wizard-target="60" aria-pressed="false">60<span>%</span><small>Threshold</small></button><button type="button" class="target-choice active" data-wizard-target="59.5" aria-pressed="true">59.5<span>%</span><small>Just under</small></button><button type="button" class="target-choice" data-wizard-target="59" aria-pressed="false">59<span>%</span><small>More room</small></button><button type="button" class="target-choice" data-wizard-target="58" aria-pressed="false">58<span>%</span><small>Extra buffer</small></button></div></div>
+              <div class="wizard-target-block">
+                <div class="wizard-label">Your target LTV <span class="field-help" tabindex="0" data-tip="LTV is the mortgage balance divided by the property's value. Lower LTV bands may offer different products, depending on the lender.">i</span></div>
+                <div class="target-options target-options-scroll wizard-target-options" role="group" aria-label="Choose your target loan-to-value">
+                  <button type="button" class="target-choice" data-wizard-target="95" aria-pressed="false">95<span>%</span><small>Top band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="90" aria-pressed="false">90<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="85" aria-pressed="false">85<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="80" aria-pressed="false">80<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="75" aria-pressed="false">75<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="70" aria-pressed="false">70<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="65" aria-pressed="false">65<span>%</span><small>LTV band</small></button>
+                  <button type="button" class="target-choice active" data-wizard-target="60" aria-pressed="true">60<span>%</span><small>Key band</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="59.5" aria-pressed="false">59.5<span>%</span><small>Buffer</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="59" aria-pressed="false">59<span>%</span><small>Buffer</small></button>
+                  <button type="button" class="target-choice" data-wizard-target="58" aria-pressed="false">58<span>%</span><small>Buffer</small></button>
+                </div>
+                <p class="target-scroll-hint">Swipe or scroll to explore the LTV bands. The under-60 options add a little breathing room.</p>
+              </div>
               <p class="wizard-error" id="wizardError3" role="alert" hidden>Enter a realistic property value to continue.</p>
             </div>
 
@@ -188,14 +204,14 @@
           <div class="control-divider"><span>THE MOVING PARTS</span><div></div></div>
 
           <div class="slider-group">
-            <div class="slider-heading"><label for="overpaySlider">Monthly overpayment</label><output id="overpayOutput" for="overpaySlider">£33</output></div>
+            <div class="slider-heading"><label for="overpaySlider">Monthly overpayment</label><div class="slider-stepper" aria-label="Edit monthly overpayment"><button type="button" class="stepper-button" data-step-range="overpaySlider" data-step="-5" aria-label="Decrease monthly overpayment">−</button><span class="stepper-prefix">£</span><input class="stepper-input" id="overpayNumber" type="number" inputmode="numeric" min="0" max="500" step="1" value="0" aria-label="Monthly overpayment in pounds"><button type="button" class="stepper-button" data-step-range="overpaySlider" data-step="5" aria-label="Increase monthly overpayment">+</button></div></div>
             <p class="slider-description">A little extra off the balance each month.</p>
             <input class="range range-green" id="overpaySlider" type="range" min="0" max="500" step="1" value="0">
             <div class="range-ends"><span>£0</span><span>£250</span><span>£500 / month</span></div>
           </div>
 
           <div class="slider-group valuation-group">
-            <div class="slider-heading"><label for="valueSlider">Expected property value</label><output id="valueOutput" for="valueSlider">—</output></div>
+            <div class="slider-heading"><label for="valueSlider">Expected property value</label><div class="slider-stepper slider-stepper-wide" aria-label="Edit expected property value"><button type="button" class="stepper-button" data-step-range="valueSlider" data-step="-1000" aria-label="Decrease property value by one thousand pounds">−</button><span class="stepper-prefix">£</span><input class="stepper-input" id="valueNumber" type="number" inputmode="numeric" min="50000" max="1000000" step="1000" value="240000" aria-label="Expected property value in pounds"><button type="button" class="stepper-button" data-step-range="valueSlider" data-step="1000" aria-label="Increase property value by one thousand pounds">+</button></div></div>
             <p class="slider-description">Try a cautious valuation as well as an optimistic one.</p>
             <input class="range range-mint" id="valueSlider" type="range" min="50000" max="1000000" step="1000" value="240000">
             <div class="range-ends"><span>£50k</span><span>£525k</span><span>£1m</span></div>
@@ -203,16 +219,24 @@
 
           <div class="target-block">
             <div class="target-label"><span>YOUR LTV GOAL</span><span class="field-help" tabindex="0" data-tip="Loan-to-value is your mortgage balance divided by the property's value. A lower LTV may unlock different mortgage products, depending on lender criteria.">i</span></div>
-            <div class="target-options" role="group" aria-label="Target loan-to-value">
-              <button type="button" class="target-choice" data-target="60">60<span>%</span><small>Threshold</small></button>
-              <button type="button" class="target-choice active" data-target="59.5" aria-pressed="true">59.5<span>%</span><small>Just under</small></button>
-              <button type="button" class="target-choice" data-target="59">59<span>%</span><small>More room</small></button>
-              <button type="button" class="target-choice" data-target="58">58<span>%</span><small>Extra buffer</small></button>
+            <div class="target-options target-options-scroll" role="group" aria-label="Target loan-to-value">
+              <button type="button" class="target-choice" data-target="95" aria-pressed="false">95<span>%</span><small>Top band</small></button>
+              <button type="button" class="target-choice" data-target="90" aria-pressed="false">90<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice" data-target="85" aria-pressed="false">85<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice" data-target="80" aria-pressed="false">80<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice" data-target="75" aria-pressed="false">75<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice" data-target="70" aria-pressed="false">70<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice" data-target="65" aria-pressed="false">65<span>%</span><small>LTV band</small></button>
+              <button type="button" class="target-choice active" data-target="60" aria-pressed="true">60<span>%</span><small>Key band</small></button>
+              <button type="button" class="target-choice" data-target="59.5" aria-pressed="false">59.5<span>%</span><small>Buffer</small></button>
+              <button type="button" class="target-choice" data-target="59" aria-pressed="false">59<span>%</span><small>Buffer</small></button>
+              <button type="button" class="target-choice" data-target="58" aria-pressed="false">58<span>%</span><small>Buffer</small></button>
             </div>
+            <p class="target-scroll-hint">Swipe or scroll to explore the LTV bands. The under-60 options add a little breathing room.</p>
           </div>
 
           <div class="cash-control">
-            <div class="slider-heading"><label for="cashSlider">Cash you could add at remortgage</label><output id="cashOutput" for="cashSlider">£0</output></div>
+            <div class="slider-heading"><label for="cashSlider">Cash you could add at remortgage</label><div class="slider-stepper" aria-label="Edit cash top-up"><button type="button" class="stepper-button" data-step-range="cashSlider" data-step="-250" aria-label="Decrease cash top-up by 250 pounds">−</button><span class="stepper-prefix">£</span><input class="stepper-input" id="cashNumber" type="number" inputmode="numeric" min="0" max="50000" step="250" value="0" aria-label="Cash top-up in pounds"><button type="button" class="stepper-button" data-step-range="cashSlider" data-step="250" aria-label="Increase cash top-up by 250 pounds">+</button></div></div>
             <p class="slider-description">Include savings you may be comfortable using as a one-off repayment.</p>
             <input class="range range-amber" id="cashSlider" type="range" min="0" max="50000" step="250" value="0">
             <div class="range-ends"><span>£0</span><span>£25k</span><span>£50k</span></div>

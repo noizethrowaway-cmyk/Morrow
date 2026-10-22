@@ -29,7 +29,8 @@ The app is designed for both a user site (`https://<user>.github.io/`) and a pro
 - No pre-filled personal mortgage figures; numeric fields start blank and prompt the user to enter their own details.
 - Editable balance, rate, regular payment, balance date and fixed-rate end date.
 - Large touch-friendly monthly overpayment, property valuation and cash top-up sliders.
-- Selectable 60%, 59.5%, 59% and 58% LTV goals.
+- Horizontally scrollable LTV targets from 95%, 90%, 85%, 80%, 75%, 70%, 65% and 60%, plus 59.5%, 59% and 58% safety-buffer targets.
+- Direct numeric editing with plus/minus controls for monthly overpayment, expected property value and one-off cash top-up; slider and numeric controls stay synchronised.
 - Estimated balance and LTV at the end of the current fix.
 - Cash injection needed to reach the selected LTV, accounting for a cash amount already planned.
 - Recommended monthly overpayment to reach the selected LTV without a lump sum.

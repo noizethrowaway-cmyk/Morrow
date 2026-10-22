@@ -2,7 +2,7 @@
   'use strict';
 
   const $ = (id) => document.getElementById(id);
-  const DEFAULTS = { overpay: '0', propertyValue: '240000', target: '59.5', cash: '0' };
+  const DEFAULTS = { overpay: '0', propertyValue: '240000', target: '60', cash: '0' };
   const STORAGE_KEY = 'morrow-planner-settings-v2';
   const LEGACY_STORAGE_KEY = 'morrow-planner-settings-v1';
   let wizardStep = 0;
@@ -140,9 +140,11 @@
     $('snapshotRate').innerHTML = `${rate.toFixed(2)}<span class="unit">%</span>`;
     $('snapshotPayment').textContent = money(regular + overpay, 2);
     $('snapshotTarget').innerHTML = `${Number(targetPct).toFixed(targetPct % 1 ? 1 : 0)}<span class="unit">%</span>`;
-    $('overpayOutput').textContent = money(overpay);
-    $('valueOutput').textContent = money(propertyValue);
-    $('cashOutput').textContent = money(cashBudget);
+    // Keep the fine-tune fields aligned with the chunky sliders unless a user is editing that field.
+    [['overpayNumber', 'overpaySlider'], ['valueNumber', 'valueSlider'], ['cashNumber', 'cashSlider']].forEach(([inputId, sliderId]) => {
+      const input = $(inputId);
+      if (document.activeElement !== input) input.value = $(sliderId).value;
+    });
     $('resultsDate').textContent = fixEnd ? `By ${formatMonthYear(fixEnd)}` : 'Fix end not set';
     $('heroFixEnd').textContent = fixEnd ? formatShortDate(fixEnd) : 'not set';
     $('paymentCountMeta').textContent = `${months} planned payment${months === 1 ? '' : 's'} in this example`;
@@ -296,6 +298,44 @@
     ['wizardOverpay', 'wizardCash'].forEach((id) => updateRangeFill($(id)));
   }
 
+  function attachRangeEditor(inputId, sliderId) {
+    const input = $(inputId);
+    const slider = $(sliderId);
+    const sync = (finalize = false) => {
+      if (input.value.trim() === '') {
+        if (finalize) input.value = slider.value;
+        return;
+      }
+      let value = Number(input.value);
+      if (!Number.isFinite(value)) return;
+      const min = Number(slider.min);
+      const max = Number(slider.max);
+      const step = Number(slider.step) || 1;
+      value = Math.min(max, Math.max(min, value));
+      if (finalize) value = min + Math.round((value - min) / step) * step;
+      value = Math.min(max, Math.max(min, value));
+      slider.value = String(value);
+      if (finalize) input.value = slider.value;
+      refresh();
+    };
+    input.addEventListener('input', () => sync(false));
+    input.addEventListener('change', () => sync(true));
+    input.addEventListener('blur', () => sync(true));
+  }
+
+  function stepRangeFromButton(button) {
+    const slider = $(button.dataset.stepRange);
+    if (!slider) return;
+    const min = Number(slider.min);
+    const max = Number(slider.max);
+    const step = Number(slider.step) || 1;
+    const delta = Number(button.dataset.step) || step;
+    let next = Number(slider.value) + delta;
+    next = min + Math.round((next - min) / step) * step;
+    slider.value = String(Math.min(max, Math.max(min, next)));
+    slider.dispatchEvent(new Event('input', { bubbles: true }));
+  }
+
   function validateWizardStep() {
     const showError = (id) => { $(id).hidden = false; };
     if (wizardStep === 1) {
@@ -382,6 +422,12 @@
   ['balanceInput', 'rateInput', 'paymentInput', 'balanceDateInput', 'fixEndInput', 'overpaySlider', 'valueSlider', 'cashSlider'].forEach((id) => {
     $(id).addEventListener('input', refresh);
     $(id).addEventListener('change', refresh);
+  });
+  attachRangeEditor('overpayNumber', 'overpaySlider');
+  attachRangeEditor('valueNumber', 'valueSlider');
+  attachRangeEditor('cashNumber', 'cashSlider');
+  document.querySelectorAll('[data-step-range]').forEach((button) => {
+    button.addEventListener('click', () => stepRangeFromButton(button));
   });
   $('resetBtn').addEventListener('click', resetToDefaults);
   $('applyRecommendation').addEventListener('click', () => {
