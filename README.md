@@ -29,6 +29,9 @@ The app is designed for both a user site (`https://<user>.github.io/`) and a pro
 - No pre-filled personal mortgage figures; numeric fields start blank and prompt the user to enter their own details.
 - Editable balance, rate, regular payment, balance date and fixed-rate end date.
 - Large touch-friendly monthly overpayment, property valuation and cash top-up sliders.
+- Responsive mobile planner layout with wrapping result values and no page-level horizontal scrolling; the LTV strip stays independently swipeable.
+- Larger mobile cash top-up input with direct amount entry and accessible plus/minus controls, as well as the slider.
+- The selected LTV band is brought into view when the target screen/planner opens.
 - Horizontally scrollable LTV targets from 95%, 90%, 85%, 80%, 75%, 70%, 65% and 60%, plus 59.5%, 59% and 58% safety-buffer targets.
 - Direct numeric editing with plus/minus controls for monthly overpayment, expected property value and one-off cash top-up; slider and numeric controls stay synchronised.
 - Estimated balance and LTV at the end of the current fix.
@@ -41,7 +44,7 @@ The app is designed for both a user site (`https://<user>.github.io/`) and a pro
 
 This is an educational estimator, not financial advice or a lender quote. It uses a monthly-rate approximation and a standard amortisation formula, assumes one payment on the first of each month after the entered balance date and before the fixed-rate end date, and does not include fees, early-repayment charges, future rates, or lender-specific product rules. Actual mortgage interest is often calculated daily and may result in a different balance. Confirm the figures, overpayment allowance, valuation and LTV eligibility with your lender or mortgage adviser.
 
-The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. The first setup uses generic illustrative copy only. Once a user builds a plan, their entries can be saved locally in the browser for the next visit. The “Clear plan & start again” action removes saved planner settings and returns to the blank welcome flow. No account or backend is required.
+The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. The first setup uses generic illustrative copy only. Once a user builds a plan, their entries can be saved locally in the browser for the next visit. The “Clear plan & start again” action removes saved planner settings and returns to the blank welcome flow. The service worker cache is versioned so updated app files replace the previous offline shell. No account or backend is required.
 
 ## Files
 

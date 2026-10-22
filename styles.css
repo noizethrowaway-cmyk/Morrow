@@ -608,3 +608,89 @@ h1 em { color: #72977c; font-family: Georgia, "Times New Roman", serif; font-wei
   .target-options-scroll .target-choice,
   .wizard-target-options.target-options-scroll .target-choice { flex: 0 0 72px; }
 }
+
+/* Mobile planner fit-and-finish: keep the layout inside the device width. */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+.app-shell { min-width: 0; }
+.app-shell main,
+#plannerApp,
+.snapshot,
+.workspace,
+.workspace > *,
+.plan-panel,
+.results-column,
+.results-column > *,
+.results-card,
+.recommendation-card,
+.scenario-card,
+.learn-section,
+.assumptions,
+.footer {
+  min-width: 0;
+  max-width: 100%;
+}
+.workspace { grid-template-columns: minmax(0, .96fr) minmax(0, 1.04fr); }
+.workspace > * { min-width: 0; }
+.results-column { min-width: 0; }
+.results-column > * { min-width: 0; }
+.projected-balance-block > div { min-width: 0; }
+.recommendation-main, .assumptions-copy { min-width: 0; }
+.target-options-scroll { overscroll-behavior-inline: contain; }
+.target-options-scroll .target-choice { scroll-snap-align: center; }
+
+@media (max-width: 850px) {
+  .workspace { grid-template-columns: minmax(0, 1fr); }
+  .results-column { width: 100%; max-width: 100%; }
+  .plan-panel, .results-card, .recommendation-card, .scenario-card { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  /* Prevent intrinsic-width result content from stretching the whole document. */
+  .app-shell { width: 100%; padding-right: 14px; padding-left: 14px; }
+  #plannerApp, .workspace, .plan-panel, .results-column,
+  .results-card, .recommendation-card, .scenario-card,
+  .learn-section, .assumptions { width: 100%; min-width: 0; }
+  .workspace { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .plan-panel { padding-right: 14px; padding-left: 14px; }
+  .results-column { display: flex; flex-direction: column; }
+  .results-card { padding-right: 14px; padding-left: 14px; }
+  .results-topline { min-width: 0; flex-wrap: wrap; gap: 6px; letter-spacing: 1px; }
+  .results-date { margin-left: auto; }
+  .projected-balance-block { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .projected-balance-block > div { width: 100%; min-width: 0; }
+  .big-number { max-width: 100%; font-size: clamp(28px, 8.2vw, 36px); letter-spacing: -1.2px; overflow-wrap: anywhere; }
+  .projected-tag { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+  .cash-outcome { min-width: 0; gap: 9px; padding-right: 10px; padding-left: 10px; }
+  .outcome-copy { min-width: 0; }
+  .outcome-copy strong { font-size: clamp(22px, 6.7vw, 26px); overflow-wrap: anywhere; }
+  .after-cash-row { align-items: flex-start; gap: 8px; }
+  .after-cash-row span { flex: 1 1 130px; min-width: 0; }
+  .after-cash-row strong { max-width: 48%; white-space: normal; overflow-wrap: anywhere; text-align: right; }
+  .recommendation-card { grid-template-columns: 36px minmax(0, 1fr); gap: 9px; }
+  .recommendation-main { min-width: 0; overflow-wrap: anywhere; }
+  .recommended-details { grid-template-columns: minmax(0, 1fr) auto; gap: 6px 8px; }
+  .recommended-details > * { min-width: 0; overflow-wrap: anywhere; }
+  .scenario-row { grid-template-columns: minmax(68px, .8fr) minmax(20px, 1fr) minmax(58px, .72fr); gap: 6px; }
+  .scenario-row > * { min-width: 0; }
+  .scenario-cash { overflow-wrap: anywhere; }
+  .assumptions { grid-template-columns: 27px minmax(0, 1fr); }
+  .assumptions > * { min-width: 0; }
+  .text-button { max-width: 100%; white-space: normal; text-align: left; }
+  .calculation-details { min-width: 0; overflow-wrap: anywhere; }
+  .footer { min-width: 0; flex-wrap: wrap; }
+  .footer > span { min-width: 0; }
+
+  /* Make the remortgage cash amount easy to tap and type, not a tiny field. */
+  .cash-control { min-width: 0; padding: 13px 11px 10px; }
+  .cash-control .slider-heading { flex-wrap: wrap; align-items: flex-start; gap: 8px; }
+  .cash-control .slider-heading > label { flex: 1 0 100%; margin-bottom: 0; }
+  .cash-control .slider-stepper { display: flex; width: 100%; min-width: 0; justify-content: space-between; align-items: center; gap: 7px; padding: 4px; }
+  .cash-control .stepper-button { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 10px; font-size: 23px; }
+  .cash-control .stepper-prefix { flex: 0 0 auto; font-size: 15px; }
+  .cash-control .stepper-input { flex: 1 1 auto; width: auto; min-width: 0; max-width: none; min-height: 40px; font-size: 17px; text-align: center; }
+  .cash-control .slider-description { line-height: 1.5; }
+}

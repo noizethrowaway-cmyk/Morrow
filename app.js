@@ -258,6 +258,16 @@
     { stage: 'Step 4 of 4 · Your approach', eyebrow: 'MAKE IT FEEL ACHIEVABLE', title: 'Build a plan that<br><em>fits your life.</em>', description: 'Choose a monthly overpayment and any cash you might be comfortable putting in later. You can adjust both on the planner screen.', kicker: 'STEP 4 OF 4', cardTitle: 'Monthly extra and possible cash', counter: '04 / 04', button: 'Build my plan' }
   ];
 
+  function revealSelectedTarget(containerSelector) {
+    const container = document.querySelector(containerSelector);
+    const active = container?.querySelector('.target-choice.active');
+    if (!container || !active) return;
+    const containerRect = container.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    const targetLeft = container.scrollLeft + activeRect.left - containerRect.left - (container.clientWidth - activeRect.width) / 2;
+    container.scrollTo({ left: Math.max(0, targetLeft), behavior: 'auto' });
+  }
+
   function renderWizard() {
     const meta = WIZARD_STEPS[wizardStep];
     document.querySelectorAll('[data-wizard-screen]').forEach((screen) => {
@@ -276,6 +286,7 @@
     $('wizardBackBtn').hidden = wizardStep === 0;
     $('wizardProgressFill').style.width = `${wizardStep === 0 ? 0 : wizardStep / 4 * 100}%`;
     document.querySelectorAll('.wizard-error').forEach((node) => { node.hidden = true; });
+    if (wizardStep === 3) requestAnimationFrame(() => revealSelectedTarget('.wizard-target-options'));
   }
 
   function showOnboarding() {
@@ -290,6 +301,7 @@
     $('plannerApp').hidden = false;
     refresh();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    requestAnimationFrame(() => revealSelectedTarget('#plannerApp .target-options-scroll'));
   }
 
   function updateWizardSliderLabels() {
@@ -404,6 +416,7 @@
         other.classList.toggle('active', active);
         other.setAttribute('aria-pressed', String(active));
       });
+      revealSelectedTarget('.wizard-target-options');
     });
   });
   ['wizardOverpay', 'wizardCash'].forEach((id) => $(id).addEventListener('input', updateWizardSliderLabels));
@@ -415,6 +428,7 @@
         other.classList.toggle('active', active);
         other.setAttribute('aria-pressed', String(active));
       });
+      revealSelectedTarget('#plannerApp .target-options-scroll');
       refresh();
     });
   });
