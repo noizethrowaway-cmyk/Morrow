@@ -1,1 +1,50 @@
-# Morrow
+# Morrow Mortgage Planner
+
+A responsive, installable static PWA for exploring mortgage overpayments, projected loan-to-value (LTV), a recommended monthly overpayment, and the one-off cash amount that may be needed at remortgage.
+
+## Run locally
+
+Open `index.html` for a quick UI preview. For service-worker/offline testing, serve the folder over localhost, for example:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000`.
+
+## Publish on GitHub Pages
+
+1. Create a new GitHub repository, for example `morrow-mortgage-planner`.
+2. Upload all files and the `icons` folder from this project to the repository root. Keep the relative paths intact.
+3. In the repository, open **Settings → Pages**.
+4. Under **Build and deployment**, choose **Deploy from a branch**, select your default branch (often `main`) and the `/ (root)` folder, then save.
+5. Open the published `https://<your-user>.github.io/<repository>/` URL. The install prompt and offline caching require HTTPS (GitHub Pages provides HTTPS) or localhost.
+6. On mobile, open the published URL in the browser and use **Add to Home Screen** / **Install app** if your browser offers it.
+
+The app is designed for both a user site (`https://<user>.github.io/`) and a project site (`https://<user>.github.io/<repository>/`) by using relative paths.
+
+## What it does
+
+- Editable balance, rate, regular payment, balance date and fixed-rate end date.
+- Large touch-friendly monthly overpayment, property valuation and cash top-up sliders.
+- Selectable 60%, 59.5%, 59% and 58% LTV goals.
+- Estimated balance and LTV at the end of the current fix.
+- Cash injection needed to reach the selected LTV, accounting for a cash amount already planned.
+- Recommended monthly overpayment to reach the selected LTV without a lump sum.
+- Comparison across £195k, £200k and £210k valuation scenarios.
+- Practical money tips, calculation notes, local settings persistence and offline app shell.
+
+## Assumptions and limitations
+
+This is an educational estimator, not financial advice or a lender quote. It uses a monthly-rate approximation and a standard amortisation formula, assumes one payment on the first of each month after the entered balance date and before the fixed-rate end date, and does not include fees, early-repayment charges, future rates, or lender-specific product rules. Actual mortgage interest is often calculated daily and may result in a different balance. Confirm the figures, overpayment allowance, valuation and LTV eligibility with your lender or mortgage adviser.
+
+The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. Resetting the form restores the starting figures and clears saved planner settings.
+
+## Files
+
+- `index.html` — page structure
+- `styles.css` — responsive sage/mint UI
+- `app.js` — mortgage calculations, controls and local persistence
+- `manifest.webmanifest` — install metadata
+- `sw.js` — offline app-shell cache
+- `icons/` — app icons

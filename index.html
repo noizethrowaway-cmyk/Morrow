@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#183f32">
+  <meta name="description" content="A calm, practical mortgage planner to explore overpayments, remortgage LTV and the cash you may need to reach your target.">
+  <meta name="color-scheme" content="light">
+  <title>Morrow — Mortgage planner</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Morrow home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" role="img"><path d="M9 25.5C9 14 18 7.7 30.2 8.4 30.4 20.2 23.8 30.2 13.1 30.2 10.9 30.2 9 28.3 9 25.5Z" fill="currentColor"/><path d="M11 30C15.5 23.5 21.1 17.9 28 12.7" fill="none" stroke="#D9F2E4" stroke-linecap="round" stroke-width="2.2"/></svg>
+        </span>
+        <span class="brand-word">morrow<span class="brand-dot">.</span><small>YOUR MORTGAGE PLAN</small></span>
+      </a>
+      <div class="topbar-right">
+        <span class="privacy-pill"><span class="privacy-dot"></span> Stays on this device</span>
+        <button class="icon-button" id="installBtn" type="button" hidden aria-label="Install Morrow" title="Install app">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="main-title">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> YOUR NEXT MOVE, MADE CLEAR</div>
+          <h1 id="main-title">A little planning.<br><em>A lot more clarity.</em></h1>
+          <p>Explore what it takes to reach your next mortgage LTV target — with monthly overpayments, a one-off cash top-up, or a mix of both.</p>
+          <div class="hero-meta">
+            <span class="meta-icon" aria-hidden="true">↗</span>
+            <span>Current fix ends <strong id="heroFixEnd">28 Feb 2030</strong></span>
+            <span class="meta-separator">·</span>
+            <span id="paymentCountMeta">40 planned payments in this example</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+          <div class="art-leaf leaf-back"></div><div class="art-leaf leaf-front"></div>
+          <div class="art-spark spark-one">✳</div><div class="art-spark spark-two">✦</div>
+          <div class="art-note"><span class="note-icon">↗</span><span><small>THE AIM</small><strong>More options.<br>Less mortgage.</strong></span></div>
+        </div>
+      </section>
+
+      <section class="snapshot" aria-label="Mortgage snapshot">
+        <div class="snapshot-heading"><span class="tiny-leaf">✳</span><span>Your starting point</span><span class="snapshot-tag">EDIT ANY FIGURE BELOW</span></div>
+        <div class="snapshot-grid">
+          <article class="snapshot-item">
+            <span class="snapshot-label">Mortgage balance</span>
+            <strong class="snapshot-value" id="snapshotBalance">£134,396</strong>
+            <span class="snapshot-foot">Outstanding today</span>
+          </article>
+          <article class="snapshot-item">
+            <span class="snapshot-label">Interest rate</span>
+            <strong class="snapshot-value" id="snapshotRate">4.56<span class="unit">%</span></strong>
+            <span class="snapshot-foot">Current fixed rate</span>
+          </article>
+          <article class="snapshot-item">
+            <span class="snapshot-label">Monthly payment</span>
+            <strong class="snapshot-value" id="snapshotPayment">£748.85</strong>
+            <span class="snapshot-foot">Including overpayment</span>
+          </article>
+          <article class="snapshot-item snapshot-item-accent">
+            <span class="snapshot-label">Target LTV</span>
+            <strong class="snapshot-value" id="snapshotTarget">59.5<span class="unit">%</span></strong>
+            <span class="snapshot-foot">A little below 60%</span>
+          </article>
+        </div>
+      </section>
+
+      <div class="workspace">
+        <section class="panel plan-panel" aria-labelledby="plan-title">
+          <div class="panel-heading">
+            <div><div class="section-kicker">MAKE IT YOURS</div><h2 id="plan-title">Your plan</h2></div>
+            <span class="step-badge">01 <span>/</span> 02</span>
+          </div>
+          <p class="panel-intro">Change the numbers to see what feels achievable. Your estimates update as you go.</p>
+
+          <div class="field-grid">
+            <div class="field-group">
+              <label for="balanceInput">Outstanding balance <span class="field-help" tabindex="0" data-tip="Use your latest mortgage statement balance. The projection begins from the balance date below.">i</span></label>
+              <div class="input-wrap"><span class="prefix">£</span><input id="balanceInput" type="number" inputmode="decimal" min="0" max="2000000" step="0.01" value="134396.39"></div>
+            </div>
+            <div class="field-group">
+              <label for="rateInput">Current interest rate</label>
+              <div class="input-wrap"><input id="rateInput" type="number" inputmode="decimal" min="0" max="30" step="0.01" value="4.56"><span class="suffix">%</span></div>
+            </div>
+            <div class="field-group">
+              <label for="paymentInput">Regular monthly payment</label>
+              <div class="input-wrap"><span class="prefix">£</span><input id="paymentInput" type="number" inputmode="decimal" min="0" max="100000" step="0.01" value="715.85"></div>
+            </div>
+            <div class="field-group">
+              <label for="balanceDateInput">Balance as of</label>
+              <div class="input-wrap date-wrap"><input id="balanceDateInput" type="date" value="2026-10-22"></div>
+            </div>
+            <div class="field-group field-wide">
+              <label for="fixEndInput">Current fixed rate ends</label>
+              <div class="input-wrap date-wrap"><input id="fixEndInput" type="date" value="2030-02-28"></div>
+              <span class="field-note">Assumes your current rate and regular payment stay the same until this date.</span>
+            </div>
+          </div>
+
+          <div class="control-divider"><span>THE MOVING PARTS</span><div></div></div>
+
+          <div class="slider-group">
+            <div class="slider-heading"><label for="overpaySlider">Monthly overpayment</label><output id="overpayOutput" for="overpaySlider">£33</output></div>
+            <p class="slider-description">A little extra off the balance each month.</p>
+            <input class="range range-green" id="overpaySlider" type="range" min="0" max="300" step="1" value="33">
+            <div class="range-ends"><span>£0</span><span>£150</span><span>£300 / month</span></div>
+          </div>
+
+          <div class="slider-group valuation-group">
+            <div class="slider-heading"><label for="valueSlider">Expected property value</label><output id="valueOutput" for="valueSlider">£200,000</output></div>
+            <p class="slider-description">Try a cautious valuation as well as an optimistic one.</p>
+            <input class="range range-mint" id="valueSlider" type="range" min="175000" max="240000" step="1000" value="200000">
+            <div class="range-ends"><span>£175k</span><span>£207.5k</span><span>£240k</span></div>
+          </div>
+
+          <div class="target-block">
+            <div class="target-label"><span>YOUR LTV GOAL</span><span class="field-help" tabindex="0" data-tip="Loan-to-value is your mortgage balance divided by the property's value. A lower LTV may unlock different mortgage products, depending on lender criteria.">i</span></div>
+            <div class="target-options" role="group" aria-label="Target loan-to-value">
+              <button type="button" class="target-choice" data-target="60">60<span>%</span><small>Threshold</small></button>
+              <button type="button" class="target-choice active" data-target="59.5" aria-pressed="true">59.5<span>%</span><small>Just under</small></button>
+              <button type="button" class="target-choice" data-target="59">59<span>%</span><small>More room</small></button>
+              <button type="button" class="target-choice" data-target="58">58<span>%</span><small>Extra buffer</small></button>
+            </div>
+          </div>
+
+          <div class="cash-control">
+            <div class="slider-heading"><label for="cashSlider">Cash you could add at remortgage</label><output id="cashOutput" for="cashSlider">£0</output></div>
+            <p class="slider-description">Include savings you may be comfortable using as a one-off repayment.</p>
+            <input class="range range-amber" id="cashSlider" type="range" min="0" max="20000" step="250" value="0">
+            <div class="range-ends"><span>£0</span><span>£10k</span><span>£20k</span></div>
+          </div>
+          <button class="reset-button" id="resetBtn" type="button"><span aria-hidden="true">↺</span> Reset to my starting figures</button>
+        </section>
+
+        <section class="results-column" aria-label="Your remortgage projection">
+          <article class="results-card" aria-labelledby="outlook-title">
+            <div class="results-topline"><span class="live-dot"></span><span>LIVE ESTIMATE</span><span class="results-date" id="resultsDate">By Feb 2030</span></div>
+            <h2 id="outlook-title">Your 2030 outlook</h2>
+            <p class="results-subtitle">A picture of where your mortgage could land with this plan.</p>
+            <div class="projected-balance-block">
+              <div><span class="result-label">Projected mortgage balance</span><strong id="projectedBalance" class="big-number">£124,130</strong></div>
+              <div class="projected-tag" id="projectedTag">Before one-off cash</div>
+            </div>
+            <div class="ltv-meter-wrap">
+              <div class="ltv-meter-header"><span>Estimated LTV before cash</span><strong id="projectedLtv">62.1%</strong></div>
+              <div class="ltv-scale" id="ltvMeterAccessible" role="img" aria-label="Estimated loan-to-value and 60 percent threshold"><div class="ltv-track"></div><div class="ltv-progress" id="ltvProgress"></div><div class="ltv-marker" id="ltvMarker"><span>60% threshold</span></div></div>
+              <div class="scale-labels"><span>0%</span><span>60%</span><span>80%+</span></div>
+            </div>
+            <div class="cash-outcome" id="cashOutcome">
+              <div class="outcome-icon" aria-hidden="true">£</div>
+              <div class="outcome-copy"><span class="outcome-label">Cash injection to hit <b id="outcomeTarget">59.5%</b></span><strong id="cashNeeded">£5,130</strong><small id="cashExplanation">Estimated one-off repayment needed at remortgage.</small></div>
+            </div>
+            <div class="after-cash-row"><span>Balance after planned cash top-up</span><strong id="postCashBalance">£124,130</strong></div>
+            <div class="after-cash-row after-cash-row-last"><span>LTV after planned cash top-up</span><strong id="postCashLtv">62.1%</strong></div>
+          </article>
+
+          <article class="recommendation-card" aria-labelledby="recommended-title">
+            <div class="recommendation-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M24 5.5 28.7 17l12.3 1-9.4 8 2.9 12L24 31.7 13.5 38l2.9-12-9.4-8 12.3-1L24 5.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M24 13v11l7 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="recommendation-main">
+              <div class="section-kicker">THE NO-LUMP-SUM ROUTE</div>
+              <h3 id="recommended-title">Monthly overpayment to hit your goal</h3>
+              <p>Estimated extra payment needed each month to reach your target LTV without a cash injection at the end.</p>
+              <div class="recommended-amount-row"><strong id="recommendedOverpay">£154<span>/mo</span></strong><span class="recommended-pill" id="recommendationStatus">Calculated for your goal</span></div>
+              <div class="recommended-details"><span>Regular payment</span><strong id="recommendedRegular">£715.85</strong><span>With recommended extra</span><strong id="recommendedTotal">£869.85 / month</strong></div>
+              <button class="apply-recommendation" type="button" id="applyRecommendation">Use this overpayment <span aria-hidden="true">↗</span></button>
+            </div>
+          </article>
+
+          <article class="scenario-card" aria-labelledby="scenario-title">
+            <div class="scenario-head"><div><div class="section-kicker">QUICK REALITY CHECK</div><h3 id="scenario-title">Valuation makes a difference</h3></div><span class="scenario-symbol" aria-hidden="true">⌁</span></div>
+            <p class="scenario-copy">Keep your monthly overpayment as it is and compare what a lower or higher valuation could mean for the one-off cash needed.</p>
+            <div class="scenario-list" id="scenarioList">
+              <div class="scenario-row"><div><strong>£195,000</strong><span>Conservative</span></div><div class="scenario-bar-wrap"><div class="scenario-bar"><span style="width: 80%"></span></div></div><strong class="scenario-cash">£8,000</strong></div>
+              <div class="scenario-row"><div><strong>£200,000</strong><span>Middle case</span></div><div class="scenario-bar-wrap"><div class="scenario-bar"><span style="width: 60%"></span></div></div><strong class="scenario-cash">£5,000</strong></div>
+              <div class="scenario-row"><div><strong>£210,000</strong><span>Higher value</span></div><div class="scenario-bar-wrap"><div class="scenario-bar"><span style="width: 30%"></span></div></div><strong class="scenario-cash">£0</strong></div>
+            </div>
+            <div class="scenario-footnote">One-off cash needed to meet your selected target LTV. Estimates rounded up.</div>
+          </article>
+        </section>
+      </div>
+
+      <section class="learn-section" aria-labelledby="learn-title">
+        <div class="learn-heading"><div><div class="section-kicker">SMALL MOVES, BETTER MONEY HABITS</div><h2 id="learn-title">A few things worth knowing</h2></div><p>Useful reminders as you shape your plan.</p></div>
+        <div class="tip-grid">
+          <article class="tip-card tip-card-green"><div class="tip-top"><span class="tip-icon">↘</span><span class="tip-number">01</span></div><h3>Aim for the band, not just the balance</h3><p>A lender's 60% LTV tier may matter more than shaving off another tiny amount. Aim a little below the boundary to give yourself breathing room.</p></article>
+          <article class="tip-card tip-card-cream"><div class="tip-top"><span class="tip-icon">◷</span><span class="tip-number">02</span></div><h3>Keep your cash cushion</h3><p>Overpayments can reduce interest, but money paid into a mortgage is harder to access again. Keep a separate emergency fund for life's surprises.</p></article>
+          <article class="tip-card tip-card-lilac"><div class="tip-top"><span class="tip-icon">⌁</span><span class="tip-number">03</span></div><h3>Compare like with like</h3><p>When the time comes, compare the total cost: rate, fees, incentives, term and flexibility — not only the headline monthly payment.</p></article>
+        </div>
+      </section>
+
+      <section class="assumptions" aria-labelledby="assumptions-title">
+        <div class="assumptions-icon" aria-hidden="true">i</div>
+        <div class="assumptions-copy"><h3 id="assumptions-title">A note on these estimates</h3><p>This is an educational planning tool, not a mortgage offer or financial advice. It estimates monthly interest at the rate entered and assumes regular payments continue until the fix end date. Lenders may calculate interest daily, apply overpayments differently, use their own valuation and set specific LTV bands. Fees, early-repayment limits and future rates aren't included. Confirm figures and eligibility with your lender or a qualified mortgage adviser before acting.</p></div>
+        <button class="text-button" id="detailsBtn" type="button" aria-expanded="false">Show calculation details <span aria-hidden="true">＋</span></button>
+        <div class="calculation-details" id="calculationDetails" hidden><p><strong>Projection method:</strong> the estimated balance is calculated from the entered starting balance, monthly interest rate and number of payments remaining, minus each regular payment and overpayment. The recommended overpayment solves for the monthly extra needed to reach the target balance without a lump sum. The cash-needed figure is the difference between the projected balance and the balance allowed by your chosen LTV, less any cash top-up you have already planned.</p><p><strong>Timing:</strong> payments are assumed on the 1st of each month after the balance date, up to but not including the fixed-rate end date. Check that the balance date reflects when the entered statement balance applies.</p></div>
+      </section>
+
+      <footer class="footer"><a class="footer-brand" href="#top">morrow<span>.</span></a><span>Made for clearer money decisions.</span><button type="button" id="shareBtn" class="footer-share">Share this planner ↗</button></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
