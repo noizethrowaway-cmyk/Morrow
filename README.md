@@ -1,6 +1,6 @@
 # Morrow Mortgage Planner
 
-A responsive, installable static PWA for exploring mortgage overpayments, projected loan-to-value (LTV), a recommended monthly overpayment, and the one-off cash amount that may be needed at remortgage.
+A responsive, installable static PWA with a guided, first-run setup for exploring mortgage overpayments, projected loan-to-value (LTV), a recommended monthly overpayment, and the one-off cash amount that may be needed at remortgage. It opens with an overview and prompts users through their own mortgage figures before revealing the planner.
 
 ## Run locally
 
@@ -25,20 +25,22 @@ The app is designed for both a user site (`https://<user>.github.io/`) and a pro
 
 ## What it does
 
+- Introductory overview followed by four guided setup steps.
+- No pre-filled personal mortgage figures; numeric fields start blank and prompt the user to enter their own details.
 - Editable balance, rate, regular payment, balance date and fixed-rate end date.
 - Large touch-friendly monthly overpayment, property valuation and cash top-up sliders.
 - Selectable 60%, 59.5%, 59% and 58% LTV goals.
 - Estimated balance and LTV at the end of the current fix.
 - Cash injection needed to reach the selected LTV, accounting for a cash amount already planned.
 - Recommended monthly overpayment to reach the selected LTV without a lump sum.
-- Comparison across £195k, £200k and £210k valuation scenarios.
+- Comparison across valuation scenarios at 5% below, at, and 5% above the user's estimate.
 - Practical money tips, calculation notes, local settings persistence and offline app shell.
 
 ## Assumptions and limitations
 
 This is an educational estimator, not financial advice or a lender quote. It uses a monthly-rate approximation and a standard amortisation formula, assumes one payment on the first of each month after the entered balance date and before the fixed-rate end date, and does not include fees, early-repayment charges, future rates, or lender-specific product rules. Actual mortgage interest is often calculated daily and may result in a different balance. Confirm the figures, overpayment allowance, valuation and LTV eligibility with your lender or mortgage adviser.
 
-The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. Resetting the form restores the starting figures and clears saved planner settings.
+The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. The first setup uses generic illustrative copy only. Once a user builds a plan, their entries can be saved locally in the browser for the next visit. The “Clear plan & start again” action removes saved planner settings and returns to the blank welcome flow. No account or backend is required.
 
 ## Files
 

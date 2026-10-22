@@ -1,6 +1,6 @@
 /* Morrow static PWA service worker: caches the app shell for offline use. */
 'use strict';
-const CACHE_NAME = 'morrow-app-shell-v1';
+const CACHE_NAME = 'morrow-app-shell-v2';
 const SCOPE_URL = self.registration.scope;
 const APP_FILES = [
   SCOPE_URL,
