@@ -40,7 +40,7 @@ Then visit `http://localhost:8000`.
 - No pre-filled personal mortgage figures; numeric fields start blank and prompt users to enter their own details.
 - Editable balance, rate, regular payment, balance date, fixed-rate end date and target LTV.
 - Large touch-friendly monthly overpayment, property valuation and cash top-up sliders.
-- Responsive mobile planner layout with wrapping result values and no page-level horizontal scrolling; the LTV strip stays independently swipeable.
+- Responsive mobile planner layout with wrapping result values and no page-level horizontal scrolling. Setup step 3 uses a responsive LTV grid so every target can be tapped without horizontal swiping; the main planner's LTV strip remains independently swipeable.
 - Direct number entry and plus/minus controls for monthly overpayment, expected property value and one-off cash top-up; the fields and sliders stay synchronised.
 - LTV targets at 95%, 90%, 85%, 80%, 75%, 70%, 65%, and 60%, plus 59.5%, 59% and 58% safety-buffer targets.
 - Estimated balance and LTV at the end of the current fix.
@@ -53,7 +53,7 @@ Then visit `http://localhost:8000`.
 
 This is an educational estimator, not financial advice or a lender quote. It uses a monthly-rate approximation and a standard amortisation formula, assumes one payment on the first of each month after the entered balance date and before the fixed-rate end date, and does not include fees, early-repayment charges, future rates, or lender-specific product rules. Actual mortgage interest is often calculated daily and may result in a different balance. Confirm the figures, overpayment allowance, valuation and LTV eligibility with your lender or mortgage adviser.
 
-The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. Once a user builds a plan, their entries can be saved locally in the browser for the next visit. The “Clear plan & start again” action removes saved planner settings and returns to the blank welcome flow. The service worker cache is versioned so updated app files replace the previous offline shell. No account or backend is required.
+The values entered into the planner are saved in the browser's local storage on that device, if available. No backend, analytics, advertising, or third-party services are included. Once a user builds a plan, their entries can be saved locally in the browser for the next visit. The “Clear plan & start again” action removes saved planner settings and returns to the blank welcome flow. The service worker cache is versioned (currently v5) so updated app files replace the previous offline shell. No account or backend is required.
 
 ## Files
 

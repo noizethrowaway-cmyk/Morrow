@@ -285,8 +285,8 @@
     $('wizardNextBtn').innerHTML = `${meta.button} <span aria-hidden="true">→</span>`;
     $('wizardBackBtn').hidden = wizardStep === 0;
     $('wizardProgressFill').style.width = `${wizardStep === 0 ? 0 : wizardStep / 4 * 100}%`;
+    $('onboarding').classList.toggle('ltv-step-active', wizardStep === 3);
     document.querySelectorAll('.wizard-error').forEach((node) => { node.hidden = true; });
-    if (wizardStep === 3) requestAnimationFrame(() => revealSelectedTarget('.wizard-target-options'));
   }
 
   function showOnboarding() {
@@ -416,7 +416,6 @@
         other.classList.toggle('active', active);
         other.setAttribute('aria-pressed', String(active));
       });
-      revealSelectedTarget('.wizard-target-options');
     });
   });
   ['wizardOverpay', 'wizardCash'].forEach((id) => $(id).addEventListener('input', updateWizardSliderLabels));

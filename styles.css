@@ -694,3 +694,62 @@ html, body {
   .cash-control .stepper-input { flex: 1 1 auto; width: auto; min-width: 0; max-width: none; min-height: 40px; font-size: 17px; text-align: center; }
   .cash-control .slider-description { line-height: 1.5; }
 }
+
+
+/* Setup step 3: show every LTV target in a responsive grid (no nested horizontal scroller). */
+.wizard-target-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  margin-top: 9px;
+  overflow: visible;
+}
+.wizard-target-grid .target-choice {
+  width: 100%;
+  min-width: 0;
+  min-height: 62px;
+  padding: 10px 4px 8px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.wizard-target-grid .target-choice small {
+  font-size: 9px;
+  line-height: 1.25;
+  white-space: normal;
+}
+.wizard-target-hint { margin-top: 8px; }
+
+@media (max-width: 600px) {
+  .wizard-target-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .wizard-target-grid .target-choice {
+    min-height: 59px;
+    padding: 9px 3px 7px;
+    font-size: 15px;
+    border-radius: 11px;
+  }
+  .wizard-target-grid .target-choice small { font-size: 8px; }
+  /* Keep Back/Continue available while users scroll through the target grid. */
+  .onboarding.ltv-step-active .wizard-card { padding-bottom: 96px; }
+  .onboarding.ltv-step-active .wizard-navigation {
+    position: fixed;
+    z-index: 40;
+    left: 14px;
+    right: 14px;
+    bottom: 0;
+    width: auto;
+    max-width: 610px;
+    margin: 0 auto;
+    padding: 11px 17px calc(11px + env(safe-area-inset-bottom));
+    border: 1px solid #e3e9e0;
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    background: rgba(255,255,255,.98);
+    box-shadow: 0 -8px 24px rgba(25,56,43,.09);
+  }
+  .onboarding.ltv-step-active .wizard-next { min-width: 136px; }
+}
